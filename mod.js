@@ -4,4 +4,14 @@ const v = crocks.Identity.of(Deno.version)
   .map(R.prop('deno'))
   .valueOf()
 
-console.log('Hello Deno! ', v)
+const defaultInfo = {
+  host: 'arweave.net',
+  port: 443,
+  protocol: 'https'
+}
+
+export default function (arweaveInfo = defaultInfo) {
+  return Object.freeze({
+    api: api.runWith(arweaveInfo)
+  })
+}
